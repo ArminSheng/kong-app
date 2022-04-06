@@ -14,11 +14,19 @@ type FormGroupProps = {
     onSubmit: (values: any) => void,
 }
 
+/**
+ * Single form panel
+ * 
+ * @returns 
+ */
 export function FormGroup({ data, group, isSubmitting, onSubmit }: FormGroupProps) {
-    const [errors] = useValidationResult(group)
-    const formItems = useMemo(() => buildForm(errors!, data?.fields), [data, errors])
     const [form] = useForm()
 
+    const [errors] = useValidationResult(group)
+
+    // Assemble form components
+    const formItems = useMemo(() => buildForm(errors!, data?.fields), [data, errors])
+    
     const onFinish = useCallback((values: any) => {
         onSubmit(values)
     }, [onSubmit])
@@ -70,6 +78,12 @@ export function FormGroup({ data, group, isSubmitting, onSubmit }: FormGroupProp
     )
 }
 
+/**
+ * 
+ * @param errors error list from validation
+ * @param fields 
+ * @returns form items map from fileds
+ */
 function buildForm(errors: ErrorList, fields?: Field[]) {
     return fields?.map(field => {
         const [fieldName, fieldObj] = Object.entries(field)[0]

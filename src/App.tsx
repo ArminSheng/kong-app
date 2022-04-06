@@ -4,6 +4,10 @@ import { FormGroup } from './components/form-group'
 import { useValidate } from './data/use-validate-schema'
 import { APIs } from './data'
 
+/**
+ * 
+ * @returns App root
+ */
 function App() {
   const { data: routes } = useGetRoutesSchema()
   const { data: consumers } = useGetConsumersSchema()
