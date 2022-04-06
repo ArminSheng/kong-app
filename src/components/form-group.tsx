@@ -111,7 +111,7 @@ function getFormComponent(field: FieldEntity, fieldName: string, errors: ErrorLi
             else component = <Input type={field.type === InputType.Integer ? 'number' : ''} />
             break;
         case InputType.Set:
-            component = <MultiSet field={field} />
+            if (field.elements.type === 'string') component = <MultiSet field={field} />
             break;
         case InputType.Array:
             if (field.elements) {
@@ -123,6 +123,7 @@ function getFormComponent(field: FieldEntity, fieldName: string, errors: ErrorLi
             formItemProps.valuePropName = "checked"
             break;
     }
+    
     return withFormItem(fieldName, field, component, errors, formItemProps)
 }
 
